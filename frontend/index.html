@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Domain-Trained QA System</title>
+  <link rel="stylesheet" href="/frontend/style.css">
+</head>
+<body>
+  <div id="uploadView" class="screen screen-upload">
+    <div class="upload-shell">
+      <div class="hero-copy">
+        <p class="eyebrow">Closed-Domain Intelligence</p>
+        <h1>Dynamic Domain-Trained QA System</h1>
+        <p class="hero-text">
+          Upload your domain dataset first. Once the system builds retrieval chunks and vectors,
+          the experience switches into a dataset-restricted chat workspace.
+        </p>
+      </div>
+
+      <section class="upload-surface">
+        <div class="surface-head">
+          <div>
+            <p class="eyebrow">Step 1</p>
+            <h2>Upload Domain Dataset</h2>
+          </div>
+          <div id="uploadSpinner" class="spinner hidden" aria-hidden="true"></div>
+        </div>
+
+        <label class="dropzone" for="fileInput">
+          <input id="fileInput" type="file" accept=".pdf,.csv,.txt" multiple>
+          <span class="dropzone-title">Choose PDF, CSV, or TXT files</span>
+          <span class="dropzone-note">Multiple files are supported for one domain session.</span>
+        </label>
+
+        <div class="upload-actions">
+          <button id="uploadButton" class="primary-button">Build Knowledge Base</button>
+          <p id="uploadStatus" class="status-text">No dataset uploaded yet.</p>
+        </div>
+
+        <div id="selectedFiles" class="selected-files">
+          <p>No files selected.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="chatView" class="screen screen-chat hidden">
+    <aside class="chat-sidebar">
+      <div class="sidebar-brand">
+        <p class="eyebrow">Dataset Session</p>
+        <h2>Dynamic Domain-Trained QA</h2>
+      </div>
+
+      <button id="newDatasetButton" class="secondary-button">New Dataset</button>
+
+      <section class="sidebar-section">
+        <div class="section-head">
+          <h3>Session</h3>
+          <span id="sessionBadge" class="session-badge">Ready</span>
+        </div>
+        <div id="datasetSummary" class="dataset-summary"></div>
+      </section>
+    </aside>
+
+    <main class="chat-main">
+      <header class="chat-topbar">
+        <div class="topbar-copy">
+          <p class="eyebrow">Step 2</p>
+          <h1>Chat With Your Dataset</h1>
+        </div>
+        <div id="chatSpinner" class="spinner hidden" aria-hidden="true"></div>
+      </header>
+
+      <section id="welcomePanel" class="welcome-panel">
+        <h2>Ask anything from the uploaded domain knowledge.</h2>
+        <p>
+          Answers are grounded only in the uploaded files. The model retrieves the most relevant chunks,
+          then answers from that context.
+        </p>
+      </section>
+
+      <section id="chatHistory" class="chat-history"></section>
+
+      <form id="chatForm" class="chat-composer">
+        <textarea id="questionInput" rows="1" placeholder="Ask a question from your uploaded dataset..." required></textarea>
+        <button type="submit" id="sendButton" class="icon-button" aria-label="Send question">
+          <span>&uarr;</span>
+        </button>
+      </form>
+    </main>
+  </div>
+
+  <script src="/frontend/script.js"></script>
+</body>
+</html>
